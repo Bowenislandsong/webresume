@@ -164,7 +164,7 @@
 				<div class="cd-project-info">
 					<p> 
 					<progress value="0" max="100" id="uploader">0%</progress>
-					<input type="file" name="Upload" id="fileButton"/>
+					<input type="file" name="upload" id="fileButton"/>
 				</p> 
 				</div>
 			</li>
@@ -204,32 +204,24 @@
   var uploader = document.getElementById('uploader');
   var fileButton = document.getElementById('fileButton');
   //listen
-  fileButton.addEventListener('change',function(e)){
+  fileButton.addEventListener('change',function(e){
   	var file = e.target.files[0];
   	var storageRef = firebase.storage().ref('job_pdfs/'+file.name);
   	var task = storageRef.put(file);
   	task.on('state_changed',
-function progress(snapshot){
-	var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) *100;
-	uploader.value = percentage;
-},
-function error(err){
+		function progress(snapshot){
+		var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) *100;
+		uploader.value = percentage;
+		},
+	function error(err){
 
-},
-function complete(){}
-  		);
-  }
+	},
+	function complete(){}
+  	);
+  });
 
 </script>
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
-
-<!-- Firechat -->
-<link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
-<script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
 
 <script src="js/jquery-2.1.1.js"></script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->
