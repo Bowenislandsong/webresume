@@ -11,8 +11,27 @@
 	<link rel="stylesheet" href="css/reset.css"> <!-- CSS reset -->
 	<link rel="stylesheet" href="css/style.css"> <!-- Resource style -->
 	<script src="js/modernizr.js"></script> <!-- Modernizr -->
+
   	
 	<title>Bowen Song</title>
+	<style media="screen">
+						body {
+							display: flex;
+							min-height: 100vh;
+							width: 100%;
+							padding: 0;
+							margin: 0;
+							align-items: center;
+							justify-content: center;
+							flex-direction: column;
+						}
+						#uploader {
+							-webkit-appearance:none;
+							appearance:none;
+							width: 50%;
+							margin-bottom: 10px;
+						}
+					</style>
 </head>
 <body>
 	<a class="cd-nav-trigger cd-text-replace" href="#primary-nav">Contact Me<span aria-hidden="false" class="cd-icon"></span></a>
@@ -62,8 +81,10 @@
 			<li>
 				<a href="#0">
 					<div class="cd-project-title">
-						<h2>Life</h2>
-						<p>Running<br>
+						<h2>Intereted? Let's Talk</h2>
+						<p>Upload your Job Description<br>
+						<p>My Hobbies<br>
+							Running<br>
 							Piano<br>
 							ThaiChi<br>
 							Hiking<br>
@@ -141,9 +162,10 @@
 				</div>
 
 				<div class="cd-project-info">
-					<p> <!-- Elaborate Details-->
-						
-					</p>
+					<p> 
+					<progress value="0" max="100" id="uploader">0%</progress>
+					<input type="file" name="Upload" id="fileButton"/>
+				</p> 
 				</div>
 			</li>
 		</ul> <!-- .cd-projects -->
@@ -178,7 +200,37 @@
     messagingSenderId: "528806995435"
   };
   firebase.initializeApp(config);
+  //get elements for file upload
+  var uploader = document.getElementById('uploader');
+  var fileButton = document.getElementById('fileButton');
+  //listen
+  fileButton.addEventListener('change',function(e)){
+  	var file = e.target.files[0];
+  	var storageRef = firebase.storage().ref('job_pdfs/'+file.name);
+  	var task = storageRef.put(file);
+  	task.on('state_changed',
+function progress(snapshot){
+	var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) *100;
+	uploader.value = percentage;
+},
+function error(err){
+
+},
+function complete(){}
+  		);
+  }
+
 </script>
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+
+<!-- Firechat -->
+<link rel="stylesheet" href="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.css" />
+<script src="https://cdn.firebase.com/libs/firechat/3.0.1/firechat.min.js"></script>
+
 <script src="js/jquery-2.1.1.js"></script>
 <script src="js/main.js"></script> <!-- Resource jQuery -->
 </body>
