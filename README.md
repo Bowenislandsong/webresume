@@ -8,6 +8,6 @@ Watch the 1080p High resolution Explaining video at
 https://youtu.be/GMV99tZvvyk
 
 
-Automated Test result 
+Self-Test result ![Alt text](testcase.jpg?raw=true "Project Structure")
 
-Manul test result ![testcase.pdf]
+Automatic Test result https://www.webpagetest.org/result/171208_59_0b3b9fedc0a4482e5234b94c6119f499/
