@@ -6,3 +6,8 @@ https://webresume-a4907.firebaseapp.com
 
 Watch the 1080p High resolution Explaining video at
 https://youtu.be/GMV99tZvvyk
+
+
+Automated Test result 
+
+Manul test result ![testcase.pdf]
